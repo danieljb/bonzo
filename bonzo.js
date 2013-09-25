@@ -210,13 +210,14 @@
 
 
   function dataValue(d) {
-    var f
+    var f, rbrace = /(?:\{[\s\S]*\}|\[[\s\S]*\])$/
     try {
       return (d === null || d === undefined) ? undefined :
         d === 'true' ? true :
           d === 'false' ? false :
             d === 'null' ? null :
-              (f = parseFloat(d)) == d ? f : d;
+              (f = parseFloat(d)) == d ? f :
+                rbrace.test(d) ? JSON.parse(d) : d;
     } catch(e) {}
     return undefined
   }
@@ -934,7 +935,7 @@
        * @return {Bonzo|string}
        */
     , val: function (s) {
-        return (typeof s == 'string') ?
+        return (typeof s == 'string' || typeof s == 'number') ?
           this.attr('value', s) :
           this.length ? this[0].value : null
       }

@@ -205,13 +205,14 @@
 
 
   function dataValue(d) {
-    var f
+    var f, rbrace = /(?:\{[\s\S]*\}|\[[\s\S]*\])$/
     try {
       return (d === null || d === undefined) ? undefined :
         d === 'true' ? true :
           d === 'false' ? false :
             d === 'null' ? null :
-              (f = parseFloat(d)) == d ? f : d;
+              (f = parseFloat(d)) == d ? f :
+                rbrace.test(d) ? JSON.parse(d) : d;
     } catch(e) {}
     return undefined
   }

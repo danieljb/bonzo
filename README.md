@@ -1,3 +1,8 @@
+Bonzo (updated data-attrs parser)
+=================================
+
+This is a fork of [Dustin Diaz’ Bonzo](https://github.com/ded/bonzo) with modified dataValue method to parse arrays and objects from HTML5 custom data attributes.
+
 Bonzo
 -----
 
